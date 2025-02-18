@@ -3,6 +3,8 @@ package entities;
 import enums.Status;
 
 import java.util.Date;
+import java.util.Objects;
+import java.util.Random;
 
 public class Book {
 
@@ -16,11 +18,11 @@ public class Book {
 
     }
 
-    public Book(String name,String Author,  String Details,Long id, Status status) {
+    public Book(String name,String Author,  String Details,Long id) {
         this.name = name;
         this.id = id;
         this.Details = Details;
-        this.status = status;
+        this.status = Status.Borrowed;
         this.Author = Author;
     }
 
@@ -64,7 +66,7 @@ public class Book {
         Author = author;
     }
 
-    public String DetailstoString(){
+    public String toString(){
         return name+ " ," +
                 "Autor: "+Author+ " ,Detalhes: "+Details +" , Id: "+id;
 
@@ -77,7 +79,15 @@ public class Book {
         this.status = Status.Available;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

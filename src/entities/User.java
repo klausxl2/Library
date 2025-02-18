@@ -1,19 +1,23 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class User {
 
+    public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
     private String name;
     private Long IdUser;
+    private Date BirthDate;
     private List<Book> books = new ArrayList<>();
 
     public User(){
 
     }
 
-    public User(String name, Long IdUser){
+    public User(String name,Date date, Long IdUser){
+        this.BirthDate = date;
         this.name = name;
         this.IdUser = IdUser;
     }
@@ -34,7 +38,7 @@ public class User {
         IdUser = idUser;
     }
 
-    public void addtBooks(Book book){
+    public void addBooks(Book book){
         books.add(book);
     }
 
@@ -48,9 +52,19 @@ public class User {
         }
     }
 
-    public String toStringDetails(){
-        return getName()+ " ,Id:"+getIdUser();
+    public String toString(){
+        return getName()+ " ,Id:"+getIdUser()+" BirthDate :"+sdf.format(BirthDate);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(IdUser, user.IdUser);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(IdUser);
+    }
 }

@@ -34,6 +34,13 @@ public class Library {
         }
     }
 
+    public void addUser(User user){
+        users.add(user);
+    }
+
+    public void removeUser(User user){
+        users.remove(user);
+    }
     public void listUsers(){
         for(User u : users){
             System.out.println(u);
